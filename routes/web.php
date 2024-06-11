@@ -18,3 +18,5 @@ Route::get('/', [AdminController::class, 'welcome'])->name('welcome');
 Route::get('admin/pending', [AdminController::class, 'pending'])->name('admin.pending');
 Route::get('admin/product', [AdminController::class, 'product'])->name('admin.product');
 Route::post('admin/product', [AdminController::class, 'addProduct'])->name('admin.add_product');
+Route::post('admin/product/{productId}/delete', [AdminController::class, 'deleteProduct']);
+Route::post('/', [AdminController::class, 'getOrder']);

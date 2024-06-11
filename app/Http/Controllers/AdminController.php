@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\UserOrder;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller
 {
     public function pending() 
     {
-        return view('admin.pending');
+
+        $pendingOrders = UserOrder::where('status', 'pending')->get();
+
+        return view('admin.pending', ['pendingOrders' => $pendingOrders]);
+
     }
 
     public function product() 
@@ -33,7 +39,7 @@ class AdminController extends Controller
         }
 
         // Saving in the database
-        $user = Product::create([
+        Product::create([
             'name' => $request->input('name'),
             'image' => $path,
             'category' => $request->input('category'),
@@ -44,6 +50,30 @@ class AdminController extends Controller
         return redirect()->route('admin.product')->with('success', 'You have successfully added a product');
     }
 
+    public function getOrder(Request $request)
+    {
+        // Validate request data if needed
+        
+        // Retrieve the table number from the request
+        $tableNumber = $request->table;
+    
+        // Loop through each order sent from the frontend
+        foreach ($request->orders as $order) {
+            // Saving the order in the database
+            UserOrder::create([
+                'table' => $tableNumber, // Use the table number provided by the frontend
+                'name' => $order['name'],
+                'amount' => $order['amount'],
+                'quantity' => $order['quantity'],
+                'category' => $order['category'], // Include category in the order
+                'status' => 'pending',
+            ]);
+        }
+    
+        // Return a response indicating success
+        return response()->json(['message' => 'Order placed successfully.']);
+    }
+    
     public function welcome()
     {
 
@@ -52,6 +82,8 @@ class AdminController extends Controller
         $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
         $unli289 = Product::where('category', 'Unli Wings 289')->get();
         $beverage = Product::where('category', 'Beverage')->get();
+        $chickenWings = Product::where('category', 'Chicken Wings')->get();
+        $burger = Product::where('category', 'Burger')->get();
 
 
         return view('welcome', ['unli199' => $unli199, 
@@ -59,6 +91,35 @@ class AdminController extends Controller
                                 'unli299' => $unli299,
                                 'unli289' => $unli289,
                                 'beverage' => $beverage,
+                                'chickenWings' => $chickenWings,
+                                'burger' => $burger,
                             ]);
-    }           
+    } 
+    
+    public function deleteProduct($productId)
+{
+    // Find the product by ID
+    $product = Product::find($productId);
+
+    // Check if the Product exists
+    if (!$product) {
+        // Return a response indicating failure (404 Not Found)
+        return response()->json(['error' => 'Product not found.'], 404);
+    }
+
+    // Get the image path from the product
+    $imagePath = public_path('upload-image/' . $product->image);
+
+    // Check if the image file exists and delete it
+    if (File::exists($imagePath)) {
+        File::delete($imagePath);
+    }
+
+    // Delete the product
+    $product->delete();
+
+    // Return a response indicating success
+    return response()->json(['message' => 'The product and associated images deleted successfully.']);
+}
+
 }

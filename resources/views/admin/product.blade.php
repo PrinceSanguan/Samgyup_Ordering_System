@@ -44,6 +44,7 @@
                               <th>Category</th>
                               <th>Price</th>
                               <th>Date Added</th>
+                              <th>Action</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -53,8 +54,11 @@
                               <td><img src="{{ asset('upload-image/' . $product->image) }}" alt="Featured Image" style="width: 50px; height: 50px; object-fit: cover;"></td>
                               <td>{{ $product->name }}</td>
                               <td>{{ $product->category }}</td> 
-                              <td>{{ $product->amount }}</td> 
-                              <td>{{ $product->created_at->format('F d, Y') }}</td>
+                              <td>{{ $product->amount ?? 'Unlimited' }}</td>
+                              <td>{{ $product->created_at->format('F j, Y g:ia') }}</td>
+                              <td>
+                                <button class="btn btn-sm btn-danger delete-btn" data-id="{{ $product->id }}">Delete</button>
+                            </td>
                           </tr>
                       </tbody>
                         @endforeach  
@@ -106,7 +110,7 @@
                   </div>
                   <div class="form-group">
                       <label>Amount</label>
-                      <input type="text" class="form-control" name="amount" placeholder="Enter amount" required>
+                      <input type="number" class="form-control" name="amount" placeholder="If Unlimited dont put price">
                   </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -127,8 +131,35 @@
     </div>
 </footer>
 
+<script>
+    $(document).ready(function() {
+        // Event delegation for dynamically loaded elements
+        $(document).on('click', '.delete-btn', function() {
+            var productId = $(this).data('id'); // Change userId to productId for consistency
+            $.ajax({
+                type: 'POST',
+                url: '/admin/product/' + productId + '/delete',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function(response) {
+                    // Handle success response
+                    alert('Product deleted successfully.');
+                    location.reload(); // Refresh the page after successful deletion
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    alert('Error: ' + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
 <!-- Ensure you have jQuery and Bootstrap JS included -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 @include('admin.footer')
+

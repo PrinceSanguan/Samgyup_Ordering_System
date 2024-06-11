@@ -29,24 +29,30 @@
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Category</th>
+                                <th>Time of Order</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Kimchi</td>
-                                        <td>Unlimited</td>
-                                        <td>5</td>
-                                        <td>Unli Samgyup 199</td>
-                                        <td>Pending</td>
-                                        <td>
-                                          <button class="btn btn-sm btn-success activate-btn" data-id="{{-- {{ $datas->id }} --}}">Delivered</button>
-                                          <button class="btn btn-sm btn-danger delete-btn" data-id="{{-- {{ $datas->id }} --}}">Delete</button>
-                                      </td>
-                                    </tr>
+                        @if ($pendingOrders)
+                          @foreach ($pendingOrders as $pendingOrder)
+                            <tr>
+                                <td>Table #{{$pendingOrder->table}}</td>
+                                <td>{{$pendingOrder->name}}</td>
+                                <td>{{$pendingOrder->amount}}</td>
+                                <td>{{$pendingOrder->quantity}}</td>
+                                <td>{{$pendingOrder->category}}</td>
+                                <td>{{ $pendingOrder->created_at->format('F j, Y g:ia') }}</td>
+                                <td>{{$pendingOrder->status}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success activate-btn" data-id="{{-- {{ $datas->id }} --}}">Delivered</button>
+                                    <button class="btn btn-sm btn-danger delete-btn" data-id="{{-- {{ $datas->id }} --}}">Delete</button>
+                                </td>
+                            </tr>
                         </tbody>
+                        @endforeach  
+                      @endif
                     </table>
                 </div>
                 <!-- /.card-body -->
