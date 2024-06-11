@@ -49,10 +49,16 @@ class AdminController extends Controller
 
         $unli199 = Product::where('category', 'Unli Samgyup 199')->get();
         $unli219 = Product::where('category', 'Unli Samgyup 219')->get();
+        $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
+        $unli289 = Product::where('category', 'Unli Wings 289')->get();
+        $beverage = Product::where('category', 'Beverage')->get();
 
 
         return view('welcome', ['unli199' => $unli199, 
                                 'unli219' => $unli219, 
+                                'unli299' => $unli299,
+                                'unli289' => $unli289,
+                                'beverage' => $beverage,
                             ]);
     }           
 }

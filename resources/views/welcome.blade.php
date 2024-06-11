@@ -137,7 +137,79 @@
         </div>
     </div>
     @endforeach  
-@endif
+    @endif
+
+    @if ($unli299)
+    @foreach ($unli299 as $index => $data)
+    <div id="samgyup299" class="menu-section container mt-5">
+        <!-- Dishes for Unli Samgyup 299 go here -->
+        <div class="order-section">
+            <div class="order-image-container">
+                <img src="{{ asset('upload-image/' . $data->image) }}" class="order-image" alt="Featured Image">
+            </div>
+            <div class="order-details">
+                <h5>{{ $data->name }}</h5>
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus-btn" onclick="decrementQuantity('quantity299-{{ $index }}')">-</button>
+                    <div class="quantity-input-container">
+                        <input type="number" id="quantity299-{{ $index }}" class="form-control" value="0" min="0" data-name="{{ $data->name }}" data-amount="{{ $data->amount }}" data-category="Unli Samgyup 299" onchange="updateOrders()">
+                    </div>
+                    <button class="quantity-btn plus-btn" onclick="incrementQuantity('quantity299-{{ $index }}')">+</button>
+                </div>
+                <h6>{{ $data->amount }}</h6>
+            </div>
+        </div>
+    </div>
+    @endforeach  
+    @endif
+
+    @if ($unli289)
+    @foreach ($unli289 as $index => $data)
+    <div id="wings289" class="menu-section container mt-5">
+        <!-- Dishes for Unli Wings 289 go here -->
+        <div class="order-section">
+            <div class="order-image-container">
+                <img src="{{ asset('upload-image/' . $data->image) }}" class="order-image" alt="Featured Image">
+            </div>
+            <div class="order-details">
+                <h5>{{ $data->name }}</h5>
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus-btn" onclick="decrementQuantity('quantity289-{{ $index }}')">-</button>
+                    <div class="quantity-input-container">
+                        <input type="number" id="quantity289-{{ $index }}" class="form-control" value="0" min="0" data-name="{{ $data->name }}" data-amount="{{ $data->amount }}" data-category="Unli Wings 289" onchange="updateOrders()">
+                    </div>
+                    <button class="quantity-btn plus-btn" onclick="incrementQuantity('quantity289-{{ $index }}')">+</button>
+                </div>
+                <h6>{{ $data->amount }}</h6>
+            </div>
+        </div>
+    </div>
+    @endforeach  
+    @endif
+
+    @if ($beverage)
+    @foreach ($beverage as $index => $data)
+    <div id="beverage" class="menu-section container mt-5">
+        <!-- Dishes for Beverage go here -->
+        <div class="order-section">
+            <div class="order-image-container">
+                <img src="{{ asset('upload-image/' . $data->image) }}" class="order-image" alt="Featured Image">
+            </div>
+            <div class="order-details">
+                <h5>{{ $data->name }}</h5>
+                <div class="quantity-controls">
+                    <button class="quantity-btn minus-btn" onclick="decrementQuantity('beverage-{{ $index }}')">-</button>
+                    <div class="quantity-input-container">
+                        <input type="number" id="beverage-{{ $index }}" class="form-control" value="0" min="0" data-name="{{ $data->name }}" data-amount="{{ $data->amount }}" data-category="Beverage" onchange="updateOrders()">
+                    </div>
+                    <button class="quantity-btn plus-btn" onclick="incrementQuantity('beverage-{{ $index }}')">+</button>
+                </div>
+                <h6>{{ $data->amount }}</h6>
+            </div>
+        </div>
+    </div>
+    @endforeach  
+    @endif
 
     <!-- Repeat for other sections... -->
 
@@ -169,7 +241,7 @@
                     const category = input.getAttribute('data-category');
                     const listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
-                    listItem.textContent = `${category} - ${name} - Quantity: ${quantity} - Price: ${amount}`;
+                    listItem.textContent = `${category} - ${name} - Quantity: ${quantity} - Price: ${amount}.`;
                     orderList.appendChild(listItem);
                 }
             });
