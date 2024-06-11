@@ -320,30 +320,36 @@
     }
     
     function sendOrderToBackend(tableNumber) {
-        // Retrieve order data
-        const orders = getOrders();
+    // Check if the user is sure about the order
+    if (!confirm("Are you sure with your order?")) {
+        return; // If the user cancels, exit the function
+    }
 
-        // Make an AJAX request to send orders to the backend
-        fetch('/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Ensure you include your CSRF token here
-            },
-            body: JSON.stringify({ orders: orders, table: tableNumber }) // Include the table number and orders in the data object
-        })
-        .then(response => {
-            if (response.ok) {
-                alert("Your order has been placed for Table " + tableNumber + ". Please allow 5 to 10 minutes for your food to arrive.");
-                location.reload(); // Reload the page after successful order placement
-            } else {
-                alert("Failed to place order. Please try again later.");
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+    // Retrieve order data
+    const orders = getOrders();
+
+    // Make an AJAX request to send orders to the backend
+    fetch('/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}' // Ensure you include your CSRF token here
+        },
+        body: JSON.stringify({ orders: orders, table: tableNumber }) // Include the table number and orders in the data object
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Your order has been placed for Table " + tableNumber + ". Please allow 5 to 10 minutes for your food to arrive.");
+            location.reload(); // Reload the page after successful order placement
+        } else {
             alert("Failed to place order. Please try again later.");
-        });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Failed to place order. Please try again later.");
+    });
+    
     }
 
     function hasExistingOrder() {

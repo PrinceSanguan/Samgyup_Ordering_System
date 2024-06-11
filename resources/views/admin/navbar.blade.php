@@ -70,7 +70,7 @@
         </li>        
 
           <li class="nav-item">
-            <a href="" class="">
+            <a href="{{ route('admin.table1') }}" class="nav-link {{ Route::is('admin.table1') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-table"></i>
                 <p>
                     Table #1

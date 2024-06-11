@@ -97,29 +97,43 @@ class AdminController extends Controller
     } 
     
     public function deleteProduct($productId)
-{
-    // Find the product by ID
-    $product = Product::find($productId);
+    {
+        // Find the product by ID
+        $product = Product::find($productId);
 
-    // Check if the Product exists
-    if (!$product) {
-        // Return a response indicating failure (404 Not Found)
-        return response()->json(['error' => 'Product not found.'], 404);
+        // Check if the Product exists
+        if (!$product) {
+            // Return a response indicating failure (404 Not Found)
+            return response()->json(['error' => 'Product not found.'], 404);
+        }
+
+        // Get the image path from the product
+        $imagePath = public_path('upload-image/' . $product->image);
+
+        // Check if the image file exists and delete it
+        if (File::exists($imagePath)) {
+            File::delete($imagePath);
+        }
+
+        // Delete the product
+        $product->delete();
+
+        // Return a response indicating success
+        return response()->json(['message' => 'The product and associated images deleted successfully.']);
     }
 
-    // Get the image path from the product
-    $imagePath = public_path('upload-image/' . $product->image);
+    public function table1()
+    {
+        // Fetch table 1 delivered orders
+        $table1Orders = UserOrder::where('status', 'delivered')->where('table', '1')->get();
 
-    // Check if the image file exists and delete it
-    if (File::exists($imagePath)) {
-        File::delete($imagePath);
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($table1Orders as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+        return view('admin.table1', compact('table1Orders', 'runningBalance'));
     }
-
-    // Delete the product
-    $product->delete();
-
-    // Return a response indicating success
-    return response()->json(['message' => 'The product and associated images deleted successfully.']);
-}
 
 }

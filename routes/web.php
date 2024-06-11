@@ -20,3 +20,5 @@ Route::get('admin/product', [AdminController::class, 'product'])->name('admin.pr
 Route::post('admin/product', [AdminController::class, 'addProduct'])->name('admin.add_product');
 Route::post('admin/product/{productId}/delete', [AdminController::class, 'deleteProduct']);
 Route::post('/', [AdminController::class, 'getOrder']);
+
+Route::get('admin/table1', [AdminController::class, 'table1'])->name('admin.table1');
