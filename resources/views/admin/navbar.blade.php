@@ -79,7 +79,7 @@
         </li>
         
         <li class="nav-item">
-            <a href="" class="">
+          <a href="{{ route('admin.table2') }}" class="nav-link {{ Route::is('admin.table2') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-chair"></i>
                 <p>
                     Table #2
@@ -88,7 +88,7 @@
         </li>
         
         <li class="nav-item">
-            <a href="" class="">
+          <a href="{{ route('admin.table3') }}" class="nav-link {{ Route::is('admin.table3') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-utensils"></i>
                 <p>
                     Table #3
@@ -97,7 +97,7 @@
         </li>
         
         <li class="nav-item">
-            <a href="" class="">
+          <a href="{{ route('admin.table4') }}" class="nav-link {{ Route::is('admin.table4') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-couch"></i>
                 <p>
                     Table #4
@@ -106,7 +106,7 @@
         </li>
         
         <li class="nav-item">
-            <a href="" class="">
+          <a href="{{ route('admin.table5') }}" class="nav-link {{ Route::is('admin.table5') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-wine-glass"></i>
                 <p>
                     Table #5
@@ -115,7 +115,7 @@
         </li>
         
         <li class="nav-item">
-            <a href="" class="">
+          <a href="{{ route('admin.table6') }}" class="nav-link {{ Route::is('admin.table6') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-glass-martini-alt"></i>
                 <p>
                     Table #6

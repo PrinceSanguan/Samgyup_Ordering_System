@@ -136,4 +136,93 @@ class AdminController extends Controller
         return view('admin.table1', compact('table1Orders', 'runningBalance'));
     }
 
+    public function table2()
+    {
+        // Fetch table 2 delivered orders
+        $table2Orders = UserOrder::where('status', 'delivered')->where('table', '2')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($table2Orders as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+        return view('admin.table2', compact('table2Orders', 'runningBalance'));
+    }
+
+    public function table3()
+    {
+        // Fetch table 3 delivered orders
+        $table3Orders = UserOrder::where('status', 'delivered')->where('table', '3')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($table3Orders as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+        return view('admin.table3', compact('table3Orders', 'runningBalance'));
+    }
+
+    public function table4()
+    {
+        // Fetch table 4 delivered orders
+        $table4Orders = UserOrder::where('status', 'delivered')->where('table', '4')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($table4Orders as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+        return view('admin.table4', compact('table4Orders', 'runningBalance'));
+    }
+
+    public function table5()
+    {
+        // Fetch table 5 delivered orders
+        $table5Orders = UserOrder::where('status', 'delivered')->where('table', '5')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($table5Orders as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+        return view('admin.table5', compact('table5Orders', 'runningBalance'));
+    }
+
+    public function table6()
+    {
+        // Fetch table 6 delivered orders
+        $table6Orders = UserOrder::where('status', 'delivered')->where('table', '6')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($table6Orders as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+        return view('admin.table6', compact('table6Orders', 'runningBalance'));
+    }
+
+
+    public function updateOrderStatus($orderId)
+    {
+        // Retrieve the order by ID
+        $order = UserOrder::find($orderId);
+
+        // Check if the order exists
+        if (!$order) {
+            return response()->json(['error' => 'Order not found.'], 404);
+        }
+
+        // Update the status to "delivered"
+        $order->status = 'delivered';
+        $order->save();
+
+        // Return a success response
+        return response()->json(['message' => 'Order status updated successfully.']);
+    }
+
 }

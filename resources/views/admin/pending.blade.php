@@ -46,7 +46,7 @@
                                 <td>{{ $pendingOrder->created_at->format('F j, Y g:ia') }}</td>
                                 <td>{{$pendingOrder->status}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-success activate-btn" data-id="{{-- {{ $datas->id }} --}}">Delivered</button>
+                                    <button class="btn btn-sm btn-success activate-btn" data-id=" {{ $pendingOrder->id }}">Delivered</button>
                                     <button class="btn btn-sm btn-danger delete-btn" data-id="{{-- {{ $datas->id }} --}}">Delete</button>
                                 </td>
                             </tr>
@@ -71,6 +71,43 @@
         <b>Version</b> 1.1.0
     </div>
 </footer>
+
+<script>
+    // Add an event listener to the "Delivered" button
+document.addEventListener('DOMContentLoaded', function() {
+    const deliveredButtons = document.querySelectorAll('.activate-btn');
+    deliveredButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const orderId = this.getAttribute('data-id');
+            updateOrderStatus(orderId);
+        });
+    });
+});
+
+// Function to send AJAX request to update order status
+function updateOrderStatus(orderId) {
+    fetch(`/admin/pending/${orderId}/updateStatus`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ status: 'delivered' }) // Assuming you only need to send the new status
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Order status updated successfully.');
+            location.reload();
+        } else {
+            alert('Failed to update order status. Please try again later.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to update order status. Please try again later.');
+    });
+}
+</script>
 
 <!-- Ensure you have jQuery and Bootstrap JS included -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
