@@ -67,7 +67,9 @@
                     Add Product
                 </p>
             </a>
-        </li>        
+        </li>      
+        
+        <li class="nav-header" style="font-size: 1.2em; color: yellow;">Tables</li>
 
           <li class="nav-item">
             <a href="{{ route('admin.table1') }}" class="nav-link {{ Route::is('admin.table1') ? 'active' : '' }}">

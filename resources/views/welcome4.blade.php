@@ -107,7 +107,7 @@
 
         <!-- Table Number and Remaining Balance Section -->
         <div class="table-info">
-            <span>Table #1</span>
+            <span>Table #4</span>
             <span>Running Balance: &#8369;{{$runningBalance}}.00</span>
         </div>
 
@@ -346,7 +346,7 @@
         window.scrollTo(0, 0);
 
         // Define table number
-        const tableNumber = 1;
+        const tableNumber = 4;
 
         // Send the order data to the backend
         sendOrderToBackend(tableNumber);

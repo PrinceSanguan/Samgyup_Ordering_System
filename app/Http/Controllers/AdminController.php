@@ -85,6 +85,14 @@ class AdminController extends Controller
         $chickenWings = Product::where('category', 'Chicken Wings')->get();
         $burger = Product::where('category', 'Burger')->get();
 
+        $balance = UserOrder::where('status', 'delivered')->where('table', '1')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($balance as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
 
         return view('welcome', ['unli199' => $unli199, 
                                 'unli219' => $unli219, 
@@ -93,6 +101,157 @@ class AdminController extends Controller
                                 'beverage' => $beverage,
                                 'chickenWings' => $chickenWings,
                                 'burger' => $burger,
+                                'runningBalance' => $runningBalance,
+                            ]);
+    } 
+
+    public function welcome2()
+    {
+        $unli199 = Product::where('category', 'Unli Samgyup 199')->get();
+        $unli219 = Product::where('category', 'Unli Samgyup 219')->get();
+        $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
+        $unli289 = Product::where('category', 'Unli Wings 289')->get();
+        $beverage = Product::where('category', 'Beverage')->get();
+        $chickenWings = Product::where('category', 'Chicken Wings')->get();
+        $burger = Product::where('category', 'Burger')->get();
+
+        $balance = UserOrder::where('status', 'delivered')->where('table', '2')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($balance as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+
+        return view('welcome2', ['unli199' => $unli199, 
+                                'unli219' => $unli219, 
+                                'unli299' => $unli299,
+                                'unli289' => $unli289,
+                                'beverage' => $beverage,
+                                'chickenWings' => $chickenWings,
+                                'burger' => $burger,
+                                'runningBalance' => $runningBalance,
+                            ]);
+    } 
+
+    public function welcome3()
+    {
+        $unli199 = Product::where('category', 'Unli Samgyup 199')->get();
+        $unli219 = Product::where('category', 'Unli Samgyup 219')->get();
+        $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
+        $unli289 = Product::where('category', 'Unli Wings 289')->get();
+        $beverage = Product::where('category', 'Beverage')->get();
+        $chickenWings = Product::where('category', 'Chicken Wings')->get();
+        $burger = Product::where('category', 'Burger')->get();
+
+        $balance = UserOrder::where('status', 'delivered')->where('table', '3')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($balance as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+
+        return view('welcome3', ['unli199' => $unli199, 
+                                'unli219' => $unli219, 
+                                'unli299' => $unli299,
+                                'unli289' => $unli289,
+                                'beverage' => $beverage,
+                                'chickenWings' => $chickenWings,
+                                'burger' => $burger,
+                                'runningBalance' => $runningBalance,
+                            ]);
+    } 
+
+    public function welcome4()
+    {
+        $unli199 = Product::where('category', 'Unli Samgyup 199')->get();
+        $unli219 = Product::where('category', 'Unli Samgyup 219')->get();
+        $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
+        $unli289 = Product::where('category', 'Unli Wings 289')->get();
+        $beverage = Product::where('category', 'Beverage')->get();
+        $chickenWings = Product::where('category', 'Chicken Wings')->get();
+        $burger = Product::where('category', 'Burger')->get();
+
+        $balance = UserOrder::where('status', 'delivered')->where('table', '4')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($balance as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+
+        return view('welcome4', ['unli199' => $unli199, 
+                                'unli219' => $unli219, 
+                                'unli299' => $unli299,
+                                'unli289' => $unli289,
+                                'beverage' => $beverage,
+                                'chickenWings' => $chickenWings,
+                                'burger' => $burger,
+                                'runningBalance' => $runningBalance,
+                            ]);
+    } 
+
+    public function welcome5()
+    {
+        $unli199 = Product::where('category', 'Unli Samgyup 199')->get();
+        $unli219 = Product::where('category', 'Unli Samgyup 219')->get();
+        $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
+        $unli289 = Product::where('category', 'Unli Wings 289')->get();
+        $beverage = Product::where('category', 'Beverage')->get();
+        $chickenWings = Product::where('category', 'Chicken Wings')->get();
+        $burger = Product::where('category', 'Burger')->get();
+
+        $balance = UserOrder::where('status', 'delivered')->where('table', '5')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($balance as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+
+        return view('welcome5', ['unli199' => $unli199, 
+                                'unli219' => $unli219, 
+                                'unli299' => $unli299,
+                                'unli289' => $unli289,
+                                'beverage' => $beverage,
+                                'chickenWings' => $chickenWings,
+                                'burger' => $burger,
+                                'runningBalance' => $runningBalance,
+                            ]);
+    } 
+
+    public function welcome6()
+    {
+        $unli199 = Product::where('category', 'Unli Samgyup 199')->get();
+        $unli219 = Product::where('category', 'Unli Samgyup 219')->get();
+        $unli299 = Product::where('category', 'Unli Samgyup 299')->get();
+        $unli289 = Product::where('category', 'Unli Wings 289')->get();
+        $beverage = Product::where('category', 'Beverage')->get();
+        $chickenWings = Product::where('category', 'Chicken Wings')->get();
+        $burger = Product::where('category', 'Burger')->get();
+
+        $balance = UserOrder::where('status', 'delivered')->where('table', '6')->get();
+
+        // Calculate running balance
+        $runningBalance = 0;
+        foreach ($balance as $order) {
+            $runningBalance += $order->amount * $order->quantity;
+        }
+
+
+        return view('welcome6', ['unli199' => $unli199, 
+                                'unli219' => $unli219, 
+                                'unli299' => $unli299,
+                                'unli289' => $unli289,
+                                'beverage' => $beverage,
+                                'chickenWings' => $chickenWings,
+                                'burger' => $burger,
+                                'runningBalance' => $runningBalance,
                             ]);
     } 
     
@@ -223,6 +382,24 @@ class AdminController extends Controller
 
         // Return a success response
         return response()->json(['message' => 'Order status updated successfully.']);
+    }
+
+    public function payAllBalances(Request $request)
+    {
+        // Fetch all orders for table 1 with status delivered
+        $orders = UserOrder::where('table', 1)->where('status', 'delivered')->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'No delivered orders found for table 1'], 404);
+        }
+
+        // Update the status to paid
+        foreach ($orders as $order) {
+            $order->status = 'paid';
+            $order->save();
+        }
+
+        return response()->json(['message' => 'All delivered orders for table 1 have been marked as paid'], 200);
     }
 
 }

@@ -11,9 +11,10 @@
                     <h1 class="m-0">Table 1 Orders</h1>
                     <span>Running Balance = &#8369;{{ $runningBalance }}.00</span>
                 </div>
-                {{-- <div class="col-sm-6 text-right"> <!-- Moved the button container to the right -->
-                  <button class="btn btn-sm btn-info" id="" data-toggle="modal" data-target="#productModal" >Add Product</button>
-                </div><!-- /.col --> --}}
+                 <div class="col-sm-6 text-right"> <!-- Moved the button container to the right -->
+                    <button class="btn btn-sm btn-success mt-2" onclick="payAllBalances()">Already Paid</button>
+                    <button class="btn btn-sm btn-danger mt-2" onclick="addOrders()">Add Orders</button>
+                </div><!-- /.col -->
             </div>
         </div>
     </div>
@@ -69,6 +70,33 @@
         <b>Version</b> 1.1.0
     </div>
 </footer>
+
+<script>
+    // Function to handle the "Pay All" button click
+    function payAllBalances() {
+        if (confirm('Is this already paid?')) {
+            fetch(`/admin/table1/paidorder`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('The customer is already paid.');
+                    location.reload();
+                } else {
+                    alert('Failed to mark all balances as paid. Please try again later.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to mark all balances as paid. Please try again later.');
+            });
+        }
+    }
+</script>
 
 <!-- Ensure you have jQuery and Bootstrap JS included -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

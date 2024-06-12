@@ -73,40 +73,45 @@
 </footer>
 
 <script>
+    // Reload the page every 10 seconds
+    setTimeout(function() {
+        location.reload();
+    }, 10000);
+
     // Add an event listener to the "Delivered" button
-document.addEventListener('DOMContentLoaded', function() {
-    const deliveredButtons = document.querySelectorAll('.activate-btn');
-    deliveredButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const orderId = this.getAttribute('data-id');
-            updateOrderStatus(orderId);
+    document.addEventListener('DOMContentLoaded', function() {
+        const deliveredButtons = document.querySelectorAll('.activate-btn');
+        deliveredButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const orderId = this.getAttribute('data-id');
+                updateOrderStatus(orderId);
+            });
         });
     });
-});
 
-// Function to send AJAX request to update order status
-function updateOrderStatus(orderId) {
-    fetch(`/admin/pending/${orderId}/updateStatus`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ status: 'delivered' }) // Assuming you only need to send the new status
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('Order status updated successfully.');
-            location.reload();
-        } else {
+    // Function to send AJAX request to update order status
+    function updateOrderStatus(orderId) {
+        fetch(`/admin/pending/${orderId}/updateStatus`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ status: 'delivered' }) // Assuming you only need to send the new status
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Order status updated successfully.');
+                location.reload();
+            } else {
+                alert('Failed to update order status. Please try again later.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
             alert('Failed to update order status. Please try again later.');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to update order status. Please try again later.');
-    });
-}
+        });
+    }
 </script>
 
 <!-- Ensure you have jQuery and Bootstrap JS included -->
