@@ -32,7 +32,16 @@ Route::get('admin/table1', [AdminController::class, 'table1'])->name('admin.tabl
 Route::post('admin/table1/paidorder', [AdminController::class, 'payAllBalances']);
 
 Route::get('admin/table2', [AdminController::class, 'table2'])->name('admin.table2');
+Route::post('admin/table2/paidorder', [AdminController::class, 'payAllBalances2']);
+
 Route::get('admin/table3', [AdminController::class, 'table3'])->name('admin.table3');
+Route::post('admin/table3/paidorder', [AdminController::class, 'payAllBalances3']);
+
 Route::get('admin/table4', [AdminController::class, 'table4'])->name('admin.table4');
+Route::post('admin/table4/paidorder', [AdminController::class, 'payAllBalances4']);
+
 Route::get('admin/table5', [AdminController::class, 'table5'])->name('admin.table5');
+Route::post('admin/table5/paidorder', [AdminController::class, 'payAllBalances5']);
+
 Route::get('admin/table6', [AdminController::class, 'table6'])->name('admin.table6');
+Route::post('admin/table6/paidorder', [AdminController::class, 'payAllBalances6']);

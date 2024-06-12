@@ -402,4 +402,94 @@ class AdminController extends Controller
         return response()->json(['message' => 'All delivered orders for table 1 have been marked as paid'], 200);
     }
 
+    public function payAllBalances2(Request $request)
+    {
+        // Fetch all orders for table 2 with status delivered
+        $orders = UserOrder::where('table', 2)->where('status', 'delivered')->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'No delivered orders found for table 2'], 404);
+        }
+
+        // Update the status to paid
+        foreach ($orders as $order) {
+            $order->status = 'paid';
+            $order->save();
+        }
+
+        return response()->json(['message' => 'All delivered orders for table 2 have been marked as paid'], 200);
+    }
+
+    public function payAllBalances3(Request $request)
+    {
+        // Fetch all orders for table 3 with status delivered
+        $orders = UserOrder::where('table', 3)->where('status', 'delivered')->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'No delivered orders found for table 3'], 404);
+        }
+
+        // Update the status to paid
+        foreach ($orders as $order) {
+            $order->status = 'paid';
+            $order->save();
+        }
+
+        return response()->json(['message' => 'All delivered orders for table 3 have been marked as paid'], 200);
+    }
+
+    public function payAllBalances4(Request $request)
+    {
+        // Fetch all orders for table 1 with status delivered
+        $orders = UserOrder::where('table', 4)->where('status', 'delivered')->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'No delivered orders found for table 4'], 404);
+        }
+
+        // Update the status to paid
+        foreach ($orders as $order) {
+            $order->status = 'paid';
+            $order->save();
+        }
+
+        return response()->json(['message' => 'All delivered orders for table 4 have been marked as paid'], 200);
+    }
+
+    public function payAllBalances5(Request $request)
+    {
+        // Fetch all orders for table 5 with status delivered
+        $orders = UserOrder::where('table', 5)->where('status', 'delivered')->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'No delivered orders found for table 5'], 404);
+        }
+
+        // Update the status to paid
+        foreach ($orders as $order) {
+            $order->status = 'paid';
+            $order->save();
+        }
+
+        return response()->json(['message' => 'All delivered orders for table 5 have been marked as paid'], 200);
+    }
+
+    public function payAllBalances6(Request $request)
+    {
+        // Fetch all orders for table 5 with status delivered
+        $orders = UserOrder::where('table', 6)->where('status', 'delivered')->get();
+
+        if ($orders->isEmpty()) {
+            return response()->json(['message' => 'No delivered orders found for table 6'], 404);
+        }
+
+        // Update the status to paid
+        foreach ($orders as $order) {
+            $order->status = 'paid';
+            $order->save();
+        }
+
+        return response()->json(['message' => 'All delivered orders for table 6 have been marked as paid'], 200);
+    }
+
 }
