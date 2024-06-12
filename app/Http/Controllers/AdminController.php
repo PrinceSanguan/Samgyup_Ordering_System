@@ -52,7 +52,6 @@ class AdminController extends Controller
 
     public function getOrder(Request $request)
     {
-        // Validate request data if needed
         
         // Retrieve the table number from the request
         $tableNumber = $request->table;
@@ -365,6 +364,23 @@ class AdminController extends Controller
         return view('admin.table6', compact('table6Orders', 'runningBalance'));
     }
 
+    public function paidOrder()
+    {
+        // Fetch Paid Orders Today
+        $today = \Carbon\Carbon::today(); // Use Carbon to get today's date
+        $paidOrders = UserOrder::where('status', 'paid')
+                                ->whereDate('created_at', $today)
+                                ->get();
+
+        // Calculate Total Income Today
+        $totalIncomeToday = 0;
+        foreach ($paidOrders as $order) {
+            $totalIncomeToday += $order->amount * $order->quantity;
+        }
+    
+        return view('admin.paid', ['paidOrders' => $paidOrders, 'totalIncomeToday' => $totalIncomeToday]);
+    }
+
 
     public function updateOrderStatus($orderId)
     {
@@ -490,6 +506,96 @@ class AdminController extends Controller
         }
 
         return response()->json(['message' => 'All delivered orders for table 6 have been marked as paid'], 200);
+    }
+
+    public function addOrder(Request $request)
+    {
+            UserOrder::create([
+                'table' => "1", 
+                'name' => $request->input('category'),
+                'amount' => $request->input('amount'),
+                'quantity' => $request->input('quantity'),
+                'category' => $request->input('category'),
+                'status' => 'delivered',
+            ]);
+        
+            // Redirect with success message
+            return redirect()->route('admin.table1')->with('success', 'The order has been added');
+    }
+
+    public function addOrder2(Request $request)
+    {
+            UserOrder::create([
+                'table' => "2", 
+                'name' => $request->input('category'),
+                'amount' => $request->input('amount'),
+                'quantity' => $request->input('quantity'),
+                'category' => $request->input('category'),
+                'status' => 'delivered',
+            ]);
+        
+            // Redirect with success message
+            return redirect()->route('admin.table2')->with('success', 'The order has been added');
+    }
+
+    public function addOrder3(Request $request)
+    {
+            UserOrder::create([
+                'table' => "3", 
+                'name' => $request->input('category'),
+                'amount' => $request->input('amount'),
+                'quantity' => $request->input('quantity'),
+                'category' => $request->input('category'),
+                'status' => 'delivered',
+            ]);
+        
+            // Redirect with success message
+            return redirect()->route('admin.table3')->with('success', 'The order has been added');
+    }
+
+    public function addOrder4(Request $request)
+    {
+            UserOrder::create([
+                'table' => "4", 
+                'name' => $request->input('category'),
+                'amount' => $request->input('amount'),
+                'quantity' => $request->input('quantity'),
+                'category' => $request->input('category'),
+                'status' => 'delivered',
+            ]);
+        
+            // Redirect with success message
+            return redirect()->route('admin.table4')->with('success', 'The order has been added');
+    }
+
+    public function addOrder5(Request $request)
+    {
+            UserOrder::create([
+                'table' => "5", 
+                'name' => $request->input('category'),
+                'amount' => $request->input('amount'),
+                'quantity' => $request->input('quantity'),
+                'category' => $request->input('category'),
+                'status' => 'delivered',
+            ]);
+        
+            // Redirect with success message
+            return redirect()->route('admin.table5')->with('success', 'The order has been added');
+    }
+
+    public function addOrder6(Request $request)
+    {
+            UserOrder::create([
+                'table' => "6", 
+                'name' => $request->input('category'),
+                'amount' => $request->input('amount'),
+                'quantity' => $request->input('quantity'),
+                'category' => $request->input('category'),
+                'status' => 'delivered',
+            ]);
+        
+            // Redirect with success message
+            return redirect()->route('admin.table6')->with('success', 'The order has been added');
     }
 
 }

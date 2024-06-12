@@ -122,6 +122,7 @@
       </div>
   </div>
 </div>
+<!-- The Modal -->
 
 <!-- Main Footer -->
 <footer class="main-footer">

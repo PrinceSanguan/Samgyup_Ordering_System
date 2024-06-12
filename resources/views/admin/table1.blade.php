@@ -13,12 +13,23 @@
                 </div>
                  <div class="col-sm-6 text-right"> <!-- Moved the button container to the right -->
                     <button class="btn btn-sm btn-success mt-2" onclick="payAllBalances()">Already Paid</button>
-                    <button class="btn btn-sm btn-danger mt-2" onclick="addOrders()">Add Orders</button>
+                    <button class="btn btn-sm btn-danger mt-2" data-toggle="modal" data-target="#productModal">Add Orders</button>
                 </div><!-- /.col -->
             </div>
         </div>
     </div>
     <!-- /.content-header -->
+
+    @if(session('success'))
+    <div id="success-alert" class="alert alert-success" style="font-size: 18px; padding: 20px;">
+        {{ session('success') }}
+    </div>
+    <script>
+        setTimeout(function() {
+            document.getElementById('success-alert').style.display = 'none';
+        }, 5000);
+    </script>
+    @endif
 
     <!--Main Content Here --->
     <div class="row">
@@ -70,6 +81,57 @@
         <b>Version</b> 1.1.0
     </div>
 </footer>
+<!-- Main Footer -->
+
+<!-- The Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalLabel">Add Orders</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('admin.addOrder') }}" method="post">
+                  @csrf
+                    <div class="form-group">
+                        <label>Table Name</label>
+                        <input type="text" class="form-control" name="table" value="1" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What unli did they avail?</label>
+                        <select class="form-control" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="Unli Samgyup 199">Unli Samgyup 199</option>
+                            <option value="Unli Samgyup 219">Unli Samgyup 219</option>
+                            <option value="Unli Samgyup 299">Unli Samgyup 299</option>
+                            <option value="Unli Wings 289">Unli Wings 289</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" class="form-control" name="amount" >
+                    </div>
+
+                    <div class="form-group">
+                        <label>How many person avail the Unli?</label>
+                        <input type="number" class="form-control" name="quantity" >
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- The Modal -->
 
 <script>
     // Function to handle the "Pay All" button click

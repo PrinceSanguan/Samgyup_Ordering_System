@@ -50,6 +50,8 @@
         >
           <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
+
+           <li class="nav-header" style="font-size: 1.2em; color: yellow;">Transaction</li>
   
            <li class="nav-item">
             <a href="{{ route('admin.pending') }}" class="nav-link {{ Route::is('admin.pending') ? 'active' : '' }}">
@@ -123,6 +125,17 @@
                     Table #6
                 </p>
             </a>
+        </li>
+
+        <li class="nav-header" style="font-size: 1.2em; color: yellow;">Paid Orders</li>
+
+        <li class="nav-item">
+          <a href="{{ route('admin.paidOrders') }}" class="nav-link {{ Route::is('admin.paidOrders') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-receipt"></i> 
+            <p>
+              Paid
+            </p>
+          </a>
         </li>
           
         </ul>
